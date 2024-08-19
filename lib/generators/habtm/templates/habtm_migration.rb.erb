@@ -4,9 +4,5 @@ class <%= migration_class_name %> < ActiveRecord::Migration[7.1]
       t.references <%= references[0] %>
       t.references <%= references[1] %>
     end
-
-    add_index :<%= table_name %>, [<%=id_columns %>],
-      name: "<%=table_name%>_index",
-      unique: true
   end
 end
