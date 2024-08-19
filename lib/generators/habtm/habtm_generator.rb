@@ -28,8 +28,8 @@ class HabtmGenerator < ActiveRecord::Generators::Base
             else
                    ""
             end
-    inject_into_class "app/models/#{model}.rb", model.camelcase,
-                      "  has_many :#{model.pluralize}, through: :#{no_ns other.pluralize}#{extra}\n"
+    # inject_into_class "app/models/#{model}.rb", model.camelcase,
+    #                   "  has_many :#{model.pluralize}, through: :#{no_ns other.pluralize}#{extra}\n"
   end
 
   def no_ns(m)
