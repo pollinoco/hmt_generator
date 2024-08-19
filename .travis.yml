@@ -1,0 +1,13 @@
+language: ruby
+sudo: false
+cache: bundler
+
+gemfile:
+- gemfiles/rails_7.0.gemfile
+
+rvm:
+- 3.1.7
+- ruby-head
+
+script:
+- bundle exec rake test
