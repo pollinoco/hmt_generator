@@ -18,6 +18,11 @@ class HabtmGenerator < ActiveRecord::Generators::Base
     add_migration_line model: models[1],  other: models[0]
   end
 
+  def create_model_file
+    file_name = "#{models[0].downcase}_#{models[1].downcase}"
+    template "model.rb", File.join("app/models", "#{file_name}.rb")
+  end
+
   private
 
   def add_migration_line(hash)
