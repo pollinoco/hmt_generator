@@ -1,8 +1,8 @@
 class <%= migration_class_name %> < ActiveRecord::Migration[7.1]
   def change
     create_table :<%= table_name %>, id: false do |t|
-      t.references <%= references[0] %>
-      t.references <%= references[1] %>
+      t.references <%= references[0] %>, null: false
+      t.references <%= references[1] %>, null: false
     end
   end
 end

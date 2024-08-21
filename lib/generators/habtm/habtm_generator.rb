@@ -71,10 +71,6 @@ class HabtmGenerator < ActiveRecord::Generators::Base
     end.join("")
   end
 
-  # def model_name
-  #   sorted_models.map { |i| no_ns i.camelize }.join("")
-  # end
-
   def model_filename
     sorted_models.map.with_index do |model, index|
       if index == 0
@@ -84,10 +80,6 @@ class HabtmGenerator < ActiveRecord::Generators::Base
       end
     end.join("_")
   end
-
-  # def model_filename
-  #   sorted_models.map { |i| no_ns i.downcase }.join("_")
-  # end
 
   def model_relationships
     sorted_models.map { |i| ":#{no_ns i.singularize}" }
