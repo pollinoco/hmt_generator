@@ -56,7 +56,6 @@ class HabtmGenerator < ActiveRecord::Generators::Base
                       end
 
     pluralized = sorted_models.map { |i| no_ns i.tableize }
-    # stolen from active_record/associations/builder/has_and_belongs_to_many.rb
     pluralized.join("\0").gsub(/^(.*[._])(.+)\0\1(.+)/, '\1\2_\3').tr("\0", junction_string)
   end
 
@@ -81,6 +80,10 @@ class HabtmGenerator < ActiveRecord::Generators::Base
 
   def id_columns
     sorted_models.map { |i| ":#{no_ns i.foreign_key}" }.join(", ")
+  end
+
+  def model_name
+    sorted_models
   end
 
   def migration_name
