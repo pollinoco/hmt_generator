@@ -61,11 +61,18 @@ class HabtmGenerator < ActiveRecord::Generators::Base
     sorted_models.map { |i| ":#{no_ns i.foreign_key}" }.join(", ")
   end
 
-  def model_name
-    sorted_models.map.with_index do |model, index|
-      "#{model[0].camelize.pluralize}#{model[1].camelize}"
+def model_name
+  sorted_models.map.with_index do |model, index|
+    # Check if it's the first model name
+    if index == 0
+      # Pluralize only the first character and then camelize the rest
+      "#{model[0..0].pluralize}#{model[1..-1].camelize}"
+    else
+      # Just camelize for other model names
+      model.camelize
     end
-  end
+  end.join("")
+end
 
   # def model_name
   #   sorted_models.map { |i| no_ns i.camelize }.join("")
