@@ -17,8 +17,7 @@ class HabtmGenerator < ActiveRecord::Generators::Base
   end
 
   def create_model_file
-    file_name = "#{models[0].downcase}_#{models[1].downcase}"
-    template "habtm_model.rb", File.join("app/models", "#{file_name}.rb")
+    template "habtm_model.rb", File.join("app/models", "#{model_filename}.rb")
   end
 
   private
@@ -64,6 +63,10 @@ class HabtmGenerator < ActiveRecord::Generators::Base
 
   def model_name
     sorted_models.map { |i| no_ns i.camelize }.join("")
+  end
+
+  def model_filename
+    sorted_models.map { |i| no_ns i.downcase }.join("_")
   end
 
   def model_relationships
