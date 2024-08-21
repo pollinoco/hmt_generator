@@ -1,13 +1,13 @@
 # HabtmGenerator
 
-[![Build Status](https://travis-ci.org/zealot128/ruby-habtm-generator.svg?branch=master)](https://travis-ci.org/zealot128/ruby-habtm-generator)
-[![Gem Version](https://badge.fury.io/rb/habtm_generator.svg)](https://badge.fury.io/rb/habtm_generator)
+[![Build Status](https://travis-ci.org/zealot128/ruby-htm-generator.svg?branch=master)](https://travis-ci.org/zealot128/ruby-htm-generator)
+[![Gem Version](https://badge.fury.io/rb/htm_generator.svg)](https://badge.fury.io/rb/htm_generator)
 
 ## Installation
 
 Add this line to your application's Gemfile:
 
-    gem 'habtm_generator', :group => :development
+    gem 'htm_generator', :group => :development
 
 And then execute:
 
@@ -18,7 +18,7 @@ And then execute:
 
 
 ```bash
-rails generate habtm user post
+rails generate htm user post
 ```
 
 This will generate a migration, for:
@@ -27,10 +27,10 @@ This will generate a migration, for:
 
 And will copy the "has\_and\_belongs\_to\_many :model" into both models (near the top of the models)
 
-This process is reversible (with ``rails destroy habtm model1 model2``).
+This process is reversible (with ``rails destroy htm model1 model2``).
 
 ## Potential Caveats
 
-* Namespaced models should work (tested in form ``admin/post``). This will generate more verbose habtm lines in the model, with explicit table names and key names
+* Namespaced models should work (tested in form ``admin/post``). This will generate more verbose htm lines in the model, with explicit table names and key names
 * Default: adds unique-constraint on index. I find this most useful for most situations. Just remove that from the generated migration before rake db:migrate.
 

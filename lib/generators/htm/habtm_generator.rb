@@ -2,14 +2,14 @@
 
 require "rails/generators/migration"
 require "rails/generators/active_record"
-class HabtmGenerator < ActiveRecord::Generators::Base
+class HtmGenerator < ActiveRecord::Generators::Base
   source_root File.expand_path("templates", __dir__)
   argument :other_model, required: true,
                          type: :string, desc: "List both part of the hmt migration to generate the table"
 
   def create_migration_file
     models.map!(&:singularize)
-    migration_template "habtm_migration.rb.erb",
+    migration_template "htm_migration.rb.erb",
                        "db/migrate/#{migration_name}.rb"
 
     add_migration_line model: models[0],  other: models[1]
@@ -17,7 +17,7 @@ class HabtmGenerator < ActiveRecord::Generators::Base
   end
 
   def create_model_file
-    template "habtm_model.rb", File.join("app/models", "#{model_filename}.rb")
+    template "htm_model.rb", File.join("app/models", "#{model_filename}.rb")
   end
 
   private

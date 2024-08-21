@@ -2,9 +2,9 @@ Description:
     Generates has and belongs to many relationship for two given models
 
 Example:
-    rails generate habtm user job
+    rails generate htm user job
 
     This will create:
        * Migration for generating jobs_users table, with index
-       * Pasting habtm into each model
-    reversible! (rails destroy habtm user job)
+       * Pasting htm into each model
+    reversible! (rails destroy htm user job)
