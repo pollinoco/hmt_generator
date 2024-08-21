@@ -83,15 +83,7 @@ class HabtmGenerator < ActiveRecord::Generators::Base
   end
 
   def model_name
-    junction_string = case coding_convention
-                      when "mysql_workbench"
-      "_has_"
-                      else
-      "_"
-                      end
-
-    singularize = sorted_models.map { |i| no_ns i.tableize }
-    singularize.join("\0").gsub(/^(.*[._])(.+)\0\1(.+)/, '\1\2_\3').tr("\0", junction_string)
+    sorted_models.map { |i| no_ns i.camelize }.join("")
   end
 
   def migration_name
