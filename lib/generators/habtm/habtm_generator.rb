@@ -62,8 +62,14 @@ class HabtmGenerator < ActiveRecord::Generators::Base
   end
 
   def model_name
-    sorted_models.map { |i| no_ns i.camelize }.join("")
+    sorted_models.map.with_index do |model, index|
+      "#{model[0].camelize.pluralize}#{model[1].camelize}"
+    end
   end
+
+  # def model_name
+  #   sorted_models.map { |i| no_ns i.camelize }.join("")
+  # end
 
   def model_filename
     sorted_models.map { |i| no_ns i.downcase }.join("_")
