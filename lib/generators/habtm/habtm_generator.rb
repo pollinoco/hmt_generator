@@ -86,6 +86,10 @@ class HabtmGenerator < ActiveRecord::Generators::Base
     sorted_models.map { |i| no_ns i.camelize }.join("")
   end
 
+  def model_relationships
+    sorted_models.map { |i| ":#{no_ns i.singularize}" }
+  end
+
   def migration_name
     "create_#{table_name}"
   end
