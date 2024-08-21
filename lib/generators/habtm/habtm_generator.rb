@@ -61,26 +61,33 @@ class HabtmGenerator < ActiveRecord::Generators::Base
     sorted_models.map { |i| ":#{no_ns i.foreign_key}" }.join(", ")
   end
 
-def model_name
-  sorted_models.map.with_index do |model, index|
-    # Check if it's the first model name
-    if index == 0
-      # Pluralize only the first character and then camelize the rest
-      "#{model[0..0].pluralize}#{model[1..-1].camelize}"
-    else
-      # Just camelize for other model names
-      model.camelize
-    end
-  end.join("")
-end
+  def model_name
+    sorted_models.map.with_index do |model, index|
+      if index == 0
+        model.camelize.pluralize
+      else
+        model.camelize
+      end
+    end.join("")
+  end
 
   # def model_name
   #   sorted_models.map { |i| no_ns i.camelize }.join("")
   # end
 
   def model_filename
-    sorted_models.map { |i| no_ns i.downcase }.join("_")
+    sorted_models.map.with_index do |model, index|
+      if index == 0
+        model.downcase.pluralize
+      else
+        model.downcase
+      end
+    end.join("_")
   end
+
+  # def model_filename
+  #   sorted_models.map { |i| no_ns i.downcase }.join("_")
+  # end
 
   def model_relationships
     sorted_models.map { |i| ":#{no_ns i.singularize}" }
