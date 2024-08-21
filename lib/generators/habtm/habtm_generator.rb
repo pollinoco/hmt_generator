@@ -20,7 +20,7 @@ class HabtmGenerator < ActiveRecord::Generators::Base
 
   def create_model_file
     file_name = "#{models[0].downcase}_#{models[1].downcase}"
-    template "model.rb", File.join("app/models", "#{file_name}.rb")
+    template "habtm_model.rb", File.join("app/models", "#{file_name}.rb")
   end
 
   private
