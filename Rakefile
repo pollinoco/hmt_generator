@@ -6,11 +6,11 @@ require "rails/dummy/tasks"
 
 module Rails
   module Dummy
-  class Generator
-  def original_name
-    "habtm_generator"
-  end
-  end
+    class Generator
+      def original_name
+        "habtm_generator"
+      end
+    end
   end
 end
 

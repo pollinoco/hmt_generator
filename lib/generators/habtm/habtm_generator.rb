@@ -5,9 +5,7 @@ require "rails/generators/active_record"
 class HabtmGenerator < ActiveRecord::Generators::Base
   source_root File.expand_path("templates", __dir__)
   argument :other_model, required: true,
-                         type: :string, desc: "List both part of the habtm migration to generate the table"
-  class_option :convention, type: :string, aliases: "-c",
-                            desc: "Table names convention. Available options are 'rails' and 'mysql_workbench'.", default: "rails"
+                         type: :string, desc: "List both part of the hmt migration to generate the table"
 
   def create_migration_file
     models.map!(&:singularize)
@@ -28,13 +26,8 @@ class HabtmGenerator < ActiveRecord::Generators::Base
   def add_migration_line(hash)
     other = hash[:other]
     model = hash[:model]
-    extra = if other.include?("/") || model.include?("/")
-                   ", :join_table => '#{table_name}', :class_name => '#{other.camelcase}', :foreign_key => '#{no_ns(model.foreign_key)}', :association_foreign_key => '#{no_ns(other.foreign_key)}'"
-            else
-                   ""
-            end
     inject_into_class "app/models/#{model}.rb", model.camelcase,
-                      "  has_many :#{no_ns table_name}\n  has_many :#{no_ns other.pluralize}#{extra}, through: :#{no_ns table_name}\n"
+                      "  has_many :#{no_ns table_name}\n  has_many :#{no_ns other.pluralize}, through: :#{no_ns table_name}\n"
   end
 
   def no_ns(m)
@@ -48,15 +41,8 @@ class HabtmGenerator < ActiveRecord::Generators::Base
   end
 
   def table_name
-    junction_string = case coding_convention
-                      when "mysql_workbench"
-      "_has_"
-                      else
-      "_"
-                      end
-
     pluralized = sorted_models.map { |i| no_ns i.tableize }
-    pluralized.join("\0").gsub(/^(.*[._])(.+)\0\1(.+)/, '\1\2_\3').tr("\0", junction_string)
+    pluralized.join("\0").gsub(/^(.*[._])(.+)\0\1(.+)/, '\1\2_\3').tr("\0", "_")
   end
 
   def models
@@ -65,13 +51,7 @@ class HabtmGenerator < ActiveRecord::Generators::Base
 
   def sorted_models
     ret = models.map(&:singularize).map(&:underscore)
-
-    case coding_convention
-    when "mysql_workbench"
-      ret
-    else
-      ret.sort
-    end
+    ret.sort
   end
 
   def references
